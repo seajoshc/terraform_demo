@@ -26,5 +26,6 @@ ip_range = "192.168.1.0/24"
 ```
 
 # Launching
-1. terraform plan
-2. terraform apply
+1. terraform get
+2. terraform plan
+3. terraform apply

@@ -2,11 +2,11 @@ resource "aws_instance" "bastion" {
   ami = "${lookup(var.amis, var.region)}"
   instance_type = "t2.medium"
   tags = {
-    Name = "bastion"
+    Name = "terraform_bastion"
   }
-  subnet_id = "${aws_subnet.demo-public.id}"
+  subnet_id = "${var.public_subnet_id}"
   associate_public_ip_address = true
-  vpc_security_group_ids = ["${aws_security_group.bastion-ssh-sg.id}"]
+  vpc_security_group_ids = ["${var.bastion_ssh_sg_id}"]
   key_name = "${var.key_name}"
 }
 

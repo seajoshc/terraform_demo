@@ -18,4 +18,6 @@ resource "aws_elb" "webapp-elb" {
     target = "HTTP:80/"
     interval = 10
   }
+
+  security_groups = ["${aws_security_group.webapp-http-inbound-sg.id}"]
 }

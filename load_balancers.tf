@@ -1,7 +1,8 @@
 resource "aws_elb" "webapp-elb" {
   name = "demo-webapp-elb"
 
-  availability_zones = ["${split(",", var.availability_zones)}"]
+  # availability_zones = ["${split(",", var.availability_zones)}"]
+  subnets = ["${aws_subnet.demo-public.id}"]
 
   listener {
     instance_port = 80

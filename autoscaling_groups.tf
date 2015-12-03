@@ -1,5 +1,6 @@
 resource "aws_autoscaling_group" "webapp-asg" {
-  availability_zones = ["${split(",", var.availability_zones)}"]
+  # availability_zones = ["${split(",", var.availability_zones)}"]
+  vpc_zone_identifier = ["${aws_subnet.demo-public.id}"]
   name = "demo-webapp-asg"
   max_size = "${var.asg_max}"
   min_size = "${var.asg_min}"

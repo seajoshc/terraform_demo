@@ -1,8 +1,7 @@
-resource "aws_elb" "webapp-elb" {
+resource "aws_elb" "webapp_elb" {
   name = "demo-webapp-elb"
 
-  # availability_zones = ["${split(",", var.availability_zones)}"]
-  subnets = ["${aws_subnet.demo-public.id}"]
+  subnets = ["${var.public_subnet_id}"]
 
   listener {
     instance_port = 80
@@ -19,5 +18,13 @@ resource "aws_elb" "webapp-elb" {
     interval = 10
   }
 
-  security_groups = ["${aws_security_group.webapp-http-inbound-sg.id}"]
+  security_groups = ["${var.webapp_http_inbound_sg_id}"]
+
+  tags {
+      Name = "terraform_elb"
+  }
+}
+
+output "webapp_elb_name" {
+  value = "${aws_elb.webapp_elb.name}"
 }

@@ -78,3 +78,66 @@ resource "aws_security_group" "nat" {
     Name = "demo-nat"
   }
 }
+
+resource "aws_security_group" "bastion-ssh-sg" {
+  name = "bastion_ssh"
+  description = "Allow SSH to Bastion host from approved ranges"
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["${var.ip_range}"]
+  }
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  vpc_id = "${aws_vpc.default.id}"
+}
+
+resource "aws_security_group" "ssh-from-bastion-sg" {
+  name = "ssh_from_bastion"
+  description = "Allow SSH from Bastion host(s)"
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    security_groups = [
+      "${aws_security_group.bastion-ssh-sg.id}",
+      "${aws_security_group.nat.id}"
+    ]
+  }
+  vpc_id = "${aws_vpc.default.id}"
+}
+
+resource "aws_security_group" "web-access-from-nat-sg" {
+  name = "private_subnet_web_access"
+  description = "Allow web access to the private subnet from the public subnet (via NAT instance)"
+  ingress {
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    cidr_blocks = ["${aws_subnet.demo-public.cidr_block}"]
+  }
+  ingress {
+    from_port = 443
+    to_port = 443
+    protocol = "tcp"
+    cidr_blocks = ["${aws_subnet.demo-public.cidr_block}"]
+  }
+  ingress {
+    from_port = -1
+    to_port = -1
+    protocol = "icmp"
+    cidr_blocks = ["${aws_subnet.demo-public.cidr_block}"]
+  }
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  vpc_id = "${aws_vpc.default.id}"
+}

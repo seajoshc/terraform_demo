@@ -1,5 +1,5 @@
 resource "aws_autoscaling_group" "webapp_asg" {
-  lifecycle { create_before_destroy = true }
+  # lifecycle { create_before_destroy = true }
   vpc_zone_identifier = ["${var.public_subnet_id}"]
   name = "demo_webapp_asg-${var.webapp_lc_name}"
   max_size = "${var.asg_max}"

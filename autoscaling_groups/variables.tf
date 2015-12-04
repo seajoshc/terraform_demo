@@ -8,7 +8,7 @@ variable "asg_min" {
 }
 
 variable "asg_max" {
-  default = "5"
+  default = "10"
 }
 
 #

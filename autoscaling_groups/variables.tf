@@ -8,11 +8,7 @@ variable "asg_min" {
 }
 
 variable "asg_max" {
-  default = "5"
-}
-
-variable "asg_desired" {
-  default = "2"
+  default = "10"
 }
 
 #
@@ -20,4 +16,5 @@ variable "asg_desired" {
 #
 variable "public_subnet_id" {}
 variable "webapp_lc_id" {}
+variable "webapp_lc_name" {}
 variable "webapp_elb_name" {}

@@ -1,5 +1,5 @@
 resource "aws_launch_configuration" "webapp_lc" {
-  name = "demo_webapp_lc"
+  lifecycle { create_before_destroy = true }
   image_id = "${lookup(var.amis, var.region)}"
   instance_type = "${var.instance_type}"
   security_groups = [
@@ -14,4 +14,7 @@ resource "aws_launch_configuration" "webapp_lc" {
 
 output "webapp_lc_id" {
   value = "${aws_launch_configuration.webapp_lc.id}"
+}
+output "webapp_lc_name" {
+  value = "${aws_launch_configuration.webapp_lc.name}"
 }

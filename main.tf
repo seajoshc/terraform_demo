@@ -7,6 +7,7 @@ provider "aws" {
 module "site" {
   source = "./site"
   key_name = "${var.key_name}"
+  ip_range = "${var.ip_range}"
 }
 
 module "launch_configurations" {

@@ -11,14 +11,14 @@ module "site" {
 }
 
 module "launch_configurations" {
-  source = "/launch_configurations"
+  source = "./launch_configurations"
   webapp_http_inbound_sg_id = "${module.site.webapp_http_inbound_sg_id}"
   webapp_ssh_inbound_sg_id = "${module.site.webapp_ssh_inbound_sg_id}"
   webapp_outbound_sg_id = "${module.site.webapp_outbound_sg_id}"
   key_name = "${var.key_name}"
 }
 module "load_balancers" {
-  source = "/load_balancers"
+  source = "./load_balancers"
   public_subnet_id = "${module.site.public_subnet_id}"
   webapp_http_inbound_sg_id = "${module.site.webapp_http_inbound_sg_id}"
 }

@@ -4,7 +4,7 @@ resource "aws_autoscaling_group" "webapp_asg" {
   name = "demo_webapp_asg-${var.webapp_lc_name}"
   max_size = "${var.asg_max}"
   min_size = "${var.asg_min}"
-  min_elb_capacity = "${var.asg_min}"
+  wait_for_elb_capacity = false
   force_delete = true
   launch_configuration = "${var.webapp_lc_id}"
   load_balancers = ["${var.webapp_elb_name}"]

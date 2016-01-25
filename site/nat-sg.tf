@@ -25,7 +25,6 @@ resource "aws_security_group" "nat" {
     protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   vpc_id = "${aws_vpc.default.id}"
   tags {
       Name = "terraform"

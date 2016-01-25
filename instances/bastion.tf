@@ -1,6 +1,6 @@
 resource "aws_instance" "bastion" {
   ami = "${lookup(var.amis, var.region)}"
-  instance_type = "t2.medium"
+  instance_type = "${var.instance_type}"
   tags = {
     Name = "terraform_bastion"
   }

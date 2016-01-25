@@ -13,7 +13,6 @@ resource "aws_security_group" "webapp_http_inbound_sg" {
     protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   vpc_id = "${aws_vpc.default.id}"
   tags {
       Name = "terraform_demo_webapp_http_inbound"
@@ -32,7 +31,6 @@ resource "aws_security_group" "webapp_ssh_inbound_sg" {
     protocol = "tcp"
     cidr_blocks = ["${var.ip_range}"]
   }
-
   vpc_id = "${aws_vpc.default.id}"
   tags {
       Name = "terraform_demo_webapp_ssh_inbound"

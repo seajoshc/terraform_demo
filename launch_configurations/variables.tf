@@ -1,13 +1,10 @@
 variable "region" {
   default = "us-west-2"
 }
-
 variable "key_name" {}
-
 variable "instance_type" {
-  default = "t2.small"
+  default = "t2.nano"
 }
-
 # Amazon Linux AMI
 # Most recent as of 2015-12-02
 variable "amis" {

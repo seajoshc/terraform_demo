@@ -9,7 +9,7 @@
 # BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations under the License.
 resource "aws_autoscaling_group" "webapp_asg" {
-  lifecycle { create_before_destroy = true }
+  lifecycle { create_before_destroy = false }
   vpc_zone_identifier = ["${var.public_subnet_id}"]
   name = "demo_webapp_asg-${var.webapp_lc_name}"
   max_size = "${var.asg_max}"

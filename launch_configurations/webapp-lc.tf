@@ -9,7 +9,7 @@
 # BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations under the License.
 resource "aws_launch_configuration" "webapp_lc" {
-  lifecycle { create_before_destroy = true }
+  lifecycle { create_before_destroy = false }
   image_id = "${lookup(var.amis, var.region)}"
   instance_type = "${var.instance_type}"
   security_groups = [

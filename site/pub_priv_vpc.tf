@@ -31,7 +31,7 @@ output "vpc_id" {
 #
 resource "aws_instance" "nat" {
   ami = "ami-75ae8245" # this is a special ami preconfigured to do NAT
-  availability_zone = "${element(var.availability_zones, 0)}"
+  availability_zone = "${var.availability_zones[0]}"
   instance_type = "t2.small"
   key_name = "${var.key_name}"
   security_groups = ["${aws_security_group.nat.id}"]
@@ -54,7 +54,7 @@ resource "aws_eip" "nat" {
 resource "aws_subnet" "demo_public" {
   vpc_id = "${aws_vpc.default.id}"
   cidr_block = "${var.public_subnet_cidr}"
-  availability_zone = "${element(var.availability_zones, 0)}"
+  availability_zone = "${var.availability_zones[0]}"
   tags {
       Name = "terraform_public_subnet"
   }
@@ -85,7 +85,7 @@ resource "aws_route_table_association" "demo_public" {
 resource "aws_subnet" "demo_private" {
   vpc_id = "${aws_vpc.default.id}"
   cidr_block = "${var.private_subnet_cidr}"
-  availability_zone = "${element(var.availability_zones, 0)}"
+  availability_zone = "${var.availability_zones[0]}"
   tags {
       Name = "terraform_private_subnet"
   }

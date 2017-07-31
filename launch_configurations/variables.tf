@@ -19,7 +19,7 @@ variable "instance_type" {
 # Most recent as of 2015-12-02
 variable "amis" {
   default = {
-    us-east-1 = "ami-60b6c60a"
+    us-east-1 = "ami-08111162"
     us-west-2 = "ami-f0091d91"
   }
 }
